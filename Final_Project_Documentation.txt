@@ -1,0 +1,3 @@
+Retrieve ratings from IMDb dataset at following link:
+
+https://www.kaggle.com/datasets/ashirwadsangwan/imdb-dataset
