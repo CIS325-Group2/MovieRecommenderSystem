@@ -4,26 +4,31 @@ Summary
 Whenever we visit a digital platform, we no longer need to worry about what to watch next as we are served with a bunch of recommendations to choose from. But how exactly the platform decides what to recommend to a specific user, and if the user is going to like that.
 In this project, we attempt to build a specific kind of recommendation system which suggest movies with similar content to the user. The Content-Based Movie Recommender System built using the cosine similarity scores.
 
-The dataset (ml-latest-small) describes 5-star rating and free-text tagging activity from [MovieLens](http://movielens.org), a movie recommendation service. It contains 100836 ratings and 3683 tag applications across 9742 movies. These data were created by 610 users between March 29, 1996 and September 24, 2018. This dataset was generated on September 26, 2018.
+The chosen dataset was obtained from Kaggle and is based on publicly accessible Netflix data from 2021, which contains information on 8800+ streaming movies and TV shows at the time. This detailed data includes information such as the movie title, genre, director, cast, release year, country of origin, and content description.
+Our model would allow a user to enter a Netflix title or input some description about the movie, and obtain recommendations for comparable titles or with similar descriptions.
+The data are contained in the files 'netflix_titles.csv', `links.csv`, `movies.csv`, `ratings.csv` and `tags.csv`. 
 
-Users were selected at random for inclusion. All selected users had rated at least 20 movies. No demographic information is included. Each user is represented by an id, and no other information is provided.
+DEPENDENCIES:
+~ Python 3
+~ Scikit-Learn
+~ Pandas/Numpy
+~ Seaborn/Matplotlib
+~ Current Web Browser
+~ Jupyter Notebook
+~ MLflow
+~ Tensorflow
+~ Pickle
+~ MS Azure Portal
+~ Flask, Flasgger APIs
+~ Docker
+~ Kubernetes
 
-The data are contained in the files `links.csv`, `movies.csv`, `ratings.csv` and `tags.csv`. More details about the contents and use of all these files follows.
-
-This is a *development* dataset. As such, it may change over time and is not an appropriate dataset for shared research results. See available *benchmark* datasets if that is your intent.
-
-This and other GroupLens data sets are publicly available for download at <http://grouplens.org/datasets/>.
-
-
-
-
-
-Citation
-========
-
-To acknowledge use of the dataset in publications, please cite the following paper:
-
-> F. Maxwell Harper and Joseph A. Konstan. 2015. The MovieLens Datasets: History and Context. ACM Transactions on Interactive Intelligent Systems (TiiS) 5, 4: 19:1–19:19. <https://doi.org/10.1145/2827872>
+INSTALLATION GUIDE:
+	Install relevant Python packages with Anaconda including Flask and Flasgger.
+	www.anaconda.com/products/individual (Python 3, Scikit-Learn & Jupyter Notebook)
+	pandas.pydata.org/pandas-docs/stable/getting_started/install.html
+	Install MLFlow package.
+	www.mlflow.org/docs/latest/quickstart.html#installing-mlflow
 
 
 
@@ -36,14 +41,21 @@ Formatting and Encoding
 The dataset files are written as [comma-separated values](http://en.wikipedia.org/wiki/Comma-separated_values) files with a single header row. Columns that contain commas (`,`) are escaped using double-quotes (`"`). These files are encoded as UTF-8. If accented characters in movie titles or tag values (e.g. Misérables, Les (1995)) display incorrectly, make sure that any program reading the data, such as a text editor, terminal, or script, is configured for UTF-8.
 
 
-User Ids
---------
 
-MovieLens users were selected at random for inclusion. Their ids have been anonymized. User ids are consistent between `ratings.csv` and `tags.csv` (i.e., the same id refers to the same user across the two files).
+Netflix_titles.csv
+~---------
+The dataset consist of 12 columns, which consists of show_id, type, title, director, cast, country, date_added, release_year, rating, duration, listed_in, description.
+
+Content Based Recommender
+We build an engine that computes similarity between movies based on certain metrics and suggests movies that are most similar to a particular movie that a user liked. Since we will be using movie metadata (or content) to build this engine, this also known as Content Based Filtering.
+
+The recommender system was based on:
+Movie Description and Taglines
+Moreover, we also use Movie Cast, Crew, Keywords and Genre for the recommender system.
 
 
 Movie Ids
----------
+~---------
 
 Only movies with at least one rating or tag are included in the dataset. These movie ids are consistent with those used on the MovieLens web site (e.g., id `1` corresponds to the URL <https://movielens.org/movies/1>). Movie ids are consistent between `ratings.csv`, `tags.csv`, `movies.csv`, and `links.csv` (i.e., the same id refers to the same movie across these four data files).
 
@@ -107,24 +119,3 @@ Genres are a pipe-separated list, and are selected from the following:
 * Western
 * (no genres listed)
 
-
-Links Data File Structure (links.csv)
----------------------------------------
-
-Identifiers that can be used to link to other sources of movie data are contained in the file `links.csv`. Each line of this file after the header row represents one movie, and has the following format:
-
-    movieId,imdbId,tmdbId
-
-movieId is an identifier for movies used by <https://movielens.org>. E.g., the movie Toy Story has the link <https://movielens.org/movies/1>.
-
-imdbId is an identifier for movies used by <http://www.imdb.com>. E.g., the movie Toy Story has the link <http://www.imdb.com/title/tt0114709/>.
-
-tmdbId is an identifier for movies used by <https://www.themoviedb.org>. E.g., the movie Toy Story has the link <https://www.themoviedb.org/movie/862>.
-
-Use of the resources listed above is subject to the terms of each provider.
-
-
-Cross-Validation
-----------------
-
-Prior versions of the MovieLens dataset included either pre-computed cross-folds or scripts to perform this computation. We no longer bundle either of these features with the dataset, since most modern toolkits provide this as a built-in feature. If you wish to learn about standard approaches to cross-fold computation in the context of recommender systems evaluation, see [LensKit](http://lenskit.org) for tools, documentation, and open-source code examples.
