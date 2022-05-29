@@ -64,7 +64,7 @@ Since we have used the TF-IDF Vectorizer, calculating the Dot Product will direc
 Movie Ids
 ~---------
 
-Only movies with at least one rating or tag are included in the dataset. These movie ids are consistent with those used on the MovieLens web site (e.g., id `1` corresponds to the URL <https://movielens.org/movies/1>). Movie ids are consistent between `ratings.csv`, `tags.csv`, `movies.csv`, and `links.csv` (i.e., the same id refers to the same movie across these four data files).
+Only movies with at least one rating or tag are included in the dataset. Movie ids are consistent between `ratings.csv`, `tags.csv`, `movies.csv`, and `links.csv` (i.e., the same id refers to the same movie across these four data files).
 
 
 Ratings Data File Structure (ratings.csv)
@@ -126,3 +126,8 @@ Genres are a pipe-separated list, and are selected from the following:
 * Western
 * (no genres listed)
 
+
+Credits
+--------
+Dataset:
+Kaggle source: https://www.kaggle.com/datasets/shivamb/netflix-shows
