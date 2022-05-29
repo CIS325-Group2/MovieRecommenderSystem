@@ -24,11 +24,11 @@ DEPENDENCIES:
 ~ Kubernetes
 
 INSTALLATION GUIDE:
-	Install relevant Python packages with Anaconda including Flask and Flasgger.
-	www.anaconda.com/products/individual (Python 3, Scikit-Learn & Jupyter Notebook)
-	pandas.pydata.org/pandas-docs/stable/getting_started/install.html
-	Install MLFlow package.
-	www.mlflow.org/docs/latest/quickstart.html#installing-mlflow
+~ Install relevant Python packages with Anaconda including Flask and Flasgger
+~ www.anaconda.com/products/individual (Python 3, Scikit-Learn & Jupyter Notebook)
+~ pandas.pydata.org/pandas-docs/stable/getting_started/install.html
+~ Install MLFlow package
+~ www.mlflow.org/docs/latest/quickstart.html#installing-mlflow
 
 
 
