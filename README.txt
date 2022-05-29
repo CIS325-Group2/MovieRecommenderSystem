@@ -53,6 +53,13 @@ The recommender system was based on:
 Movie Description and Taglines
 Moreover, we also use Movie Cast, Crew, Keywords and Genre for the recommender system.
 
+Cosine Similarity
+We will be using the Cosine Similarity to calculate a numeric quantity that denotes the similarity between two movies. Mathematically, it is defined as follows:
+
+cosine(x,y)=x.y⊺||x||.||y|| 
+Since we have used the TF-IDF Vectorizer, calculating the Dot Product will directly give us the Cosine Similarity Score. Therefore, we will use sklearn's linear_kernel since it is much faster.
+
+
 
 Movie Ids
 ~---------
