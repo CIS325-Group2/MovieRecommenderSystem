@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netflix-recommender
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: netflix-recommender 
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5 
+  template:
+    metadata:
+      labels:
+        app: netflix-recommender 
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: netflix-recommender
+        image: cis325acr.azurecr.io/netflixrecommenderapi
+        ports:
+        - containerPort: 5000
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: netflix-recommender
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 5000
+  selector:
+    app: netflix-recommender 
