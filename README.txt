@@ -125,7 +125,18 @@ Genres are a pipe-separated list, and are selected from the following:
 * War
 * Western
 * (no genres listed)
+------------------------------------------------------
+GIT PUSH & SOURCE CONTROL
 
+echo "# MovieRecommenderSystem" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/CIS325-Group2/MovieRecommenderSystem.git
+git push -u origin main
+
+-------------------------------------------------------
 
 Credits
 --------
