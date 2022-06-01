@@ -54,7 +54,6 @@ Formatting and Encoding
 The dataset files are written as [comma-separated values](http://en.wikipedia.org/wiki/Comma-separated_values) files with a single header row. Columns that contain commas (`,`) are escaped using double-quotes (`"`). These files are encoded as UTF-8. If accented characters in movie titles or tag values (e.g. Misérables, Les (1995)) display incorrectly, make sure that any program reading the data, such as a text editor, terminal, or script, is configured for UTF-8.
 
 
-
 Netflix_titles.csv
 ~---------
 The dataset consist of 12 columns, which consists of show_id, type, title, director, cast, country, date_added, release_year, rating, duration, listed_in, description.
@@ -141,17 +140,85 @@ Genres are a pipe-separated list, and are selected from the following:
 ------------------------------------------------------
 GIT PUSH & SOURCE CONTROL
 
-echo "# MovieRecommenderSystem" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/CIS325-Group2/MovieRecommenderSystem.git
-git push -u origin main
+>>echo "# MovieRecommenderSystem" >> README.md
+>>git init
+>>git add README.md
+>>git commit -m "first commit"
+>>git branch -M main
+>>git remote add origin https://github.com/CIS325-Group2/MovieRecommenderSystem.git
+>>git push -u origin main
 
 -------------------------------------------------------
+CREATING A DOCKER IMAGE
 
-Credits
---------
+Set Current Working Directory To ....\MovieRecommenderSystem
+
+>>docker ps
+
+>>docker images
+
+>>docker build -f Dockerfile .
+
+>>docker images 
+COPY <none> IMAGE ID
+
+>>docker tag <IMAGE ID> <IMAGE_NAME:VERSION>
+
+--------------------------------------------
+
+RUNNING A DOCKER CONTAINER IN LOCAL MACHINE
+
+>>docker run -d -p 5000:5000 --name MovieRecommenderSystem <IMAGE_NAME:VERSION>
+
+>>Launch Browser & Start getting inferences from the model
+
+-------------------------------------------
+
+CONTAINER REGISTRY
+
+Creating a container registry on ML Azure is as simple as creating a new virtual machine. 
+The first step is to log into the portal and choosing the option to create a new resource, 
+and then searching the options for “Container Registry”.
+Select ‘create’ to launch the next step.
+The first and most important step of creating the registry is to choose the subscription option, 
+name the new resource group, name the registry, choose the region location and a Basic SKU for our purposes. 
+For the rest of the screens, the default options will suffice
+
+Review and create the resource.  The final screen will confirm that deployment is complete
+After the Container Registry has been successfully deployed, on the resource home screen you will be able
+to view valuable information for future use.
+
+----------------------------------------------------
+
+CONTAINER REGISTRY WITH KUBERNETES
+
+First, log into Azure via the CLI and run the command:
+>> az login
+
+Be sure to have the exact Container Registry name saved, which can be found on the Azure portal, and have the Docker ‘daemon’ running on your machine.
+
+To authenticate to the Azure ACR, on the command line interface run the following command:
+>> az acr login <registry_name> --name 
+
+Be sure you are working in the proper directory where files are stored. If necessary change to where your Dockerfile is located.
+Now type the following command to build and register your docker image with the ACR:
+>> az acr build --image myimage:v1 --registry <registry_name> --file Dockerfile .
+
+Now, the Kubernetes cluster must be created, Search for a Microsoft Kubernetes Service under available resources and select ‘Create’.
+On the basics tab, choose the proper resource group with the container registry, use a Standard configuration, name the Cluster, 
+choose the region, available zones and node sizes. 
+The Resource identity should be System-assigned managed identity.
+Make sure that you check yes to Enable HTTP application routing.
+Select the previously created Container Registry and leave Container monitoring enabled.
+Now you can review and create the cluster.
+
+Now the model can be publicly deployed as a web service. Using the “External IP”, you can log on to the user interface on any web browser. 
+For this, our public model testing IP is 20.221.3.220.
+
+
+
+------------------------------------------
+
+CREDITS 
 Dataset:
 Kaggle source: https://www.kaggle.com/datasets/shivamb/netflix-shows
