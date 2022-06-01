@@ -30,6 +30,19 @@ INSTALLATION GUIDE:
 ~ Install MLFlow package
 ~ www.mlflow.org/docs/latest/quickstart.html#installing-mlflow
 
+EXECUTING PROGRAM 
+To Start MLflow, go to anaconda prompt and execute:
+1) Start MLflow server: 
+>> mlflow server --backend-store-uri 'C:/temp/mlflow/localserver'
+2) Open browser and go to http://localhost:5000 for MLflow UI
+Once MLflow is running, open a new anaconda prompt and execute:
+Jupyter Notebook
+
+Run the first experiment, and then go to http://localhost:5000 and view the results in MLFlow. 
+The MLFlow portal will list any model runs (successful or not).
+
+Once a model is successfully tracked and saved via MLFlow, it should be tested locally by creating a Flask python file (.py) 
+and exposed on a local port (such as 5000) using the Swagger API, entering the proper input to test the expected output
 
 
 Content and Use of Files
